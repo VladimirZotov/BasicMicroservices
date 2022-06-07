@@ -12,4 +12,6 @@ var app = builder.Build();
 
 app.MapGet("/", () => "Hello World!");
 
+PrepDb.PrepPopulation(app);
+
 app.Run();
