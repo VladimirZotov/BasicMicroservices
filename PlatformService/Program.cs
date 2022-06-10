@@ -12,7 +12,12 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 var app = builder.Build();
 
-app.MapGet("/", () => "Hello World!");
+app.UseRouting();
+app.UseAuthorization();
+
+app.UseEndpoints(endpoints => { 
+    endpoints.MapControllers();
+});
 
 PrepDb.PrepPopulation(app);
 
