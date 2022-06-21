@@ -10,11 +10,13 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "K8S", "K8S", "{78C27B8A-098F-487C-B489-AFAC6F2F5F29}"
 	ProjectSection(SolutionItems) = preProject
 		commands-depl.yaml = commands-depl.yaml
+		ingress-nginx-depl.yaml = ingress-nginx-depl.yaml
+		ingress-srv.yaml = ingress-srv.yaml
 		platforms-depl.yaml = platforms-depl.yaml
 		platforms-np-srv.yaml = platforms-np-srv.yaml
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommandsService", "CommandsService\CommandsService.csproj", "{E890FA3E-8F46-430C-BA85-C5433F747F17}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommandsService", "CommandsService\CommandsService.csproj", "{E890FA3E-8F46-430C-BA85-C5433F747F17}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
