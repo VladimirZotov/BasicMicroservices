@@ -15,6 +15,9 @@ spec:
    containers:
     - name: platformservice
       image: vazotov/platformservice:latest
+      env:
+       - name: ASPNETCORE_ENVIRONMENT
+         value: "Production"
 ---
 apiVersion: v1
 kind: Service
