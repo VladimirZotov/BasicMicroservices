@@ -71,6 +71,7 @@ namespace PlatformService.AsyncDataServices
                 _channel.Close();
                 _connection.Close();
             }
+
         }
 
         private void SendMessage(string message)
