@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using PlatformService.AsyncDataServices;
 using PlatformService.Data;
 using PlatformService.Dto;
 using PlatformService.Models;
@@ -14,12 +15,14 @@ namespace PlatformService.Controllers
         private readonly IMapper _mapper;
         private readonly IPlatformRepo _platformRepo;
         private readonly ICommandDataClient _commandDataClient;
+        private readonly IMessageBusClient _messageBusClient;
 
-        public PlatformsController(IMapper mapper, IPlatformRepo platformRepo, ICommandDataClient commandDataClient )
+        public PlatformsController(IMapper mapper, IPlatformRepo platformRepo, ICommandDataClient commandDataClient, IMessageBusClient messageBusClient )
         {
             _mapper = mapper;
             _platformRepo = platformRepo;
             _commandDataClient = commandDataClient;
+            _messageBusClient = messageBusClient;
         }
         [HttpPost]
         public async Task<ActionResult<PlatformReadDto>> CreateAsync(PlatformCreateDto platformCreateDto)
@@ -30,9 +33,12 @@ namespace PlatformService.Controllers
 
             var platformReadDto = _mapper.Map<PlatformReadDto>(platform);
 
+            var platformPublishedDto = _mapper.Map<PlatformPublishedDto>(platformReadDto);
+            platformPublishedDto.Event = "Platform Published";
+
             try
             {
-                await _commandDataClient.SendPlatformToCommand(platformReadDto);
+                _messageBusClient.PublishNewPlatform(platformPublishedDto);
             }
             catch (Exception ex)
             {
