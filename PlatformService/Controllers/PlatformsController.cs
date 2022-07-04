@@ -34,7 +34,7 @@ namespace PlatformService.Controllers
             var platformReadDto = _mapper.Map<PlatformReadDto>(platform);
 
             var platformPublishedDto = _mapper.Map<PlatformPublishedDto>(platformReadDto);
-            platformPublishedDto.Event = "Platform Published";
+            platformPublishedDto.Event = "Platform_Published";
 
             try
             {
